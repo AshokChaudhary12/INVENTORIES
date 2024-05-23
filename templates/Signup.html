@@ -1,0 +1,46 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title signup">Signup Form</div>
+    </div>
+    <div class="form-container">
+        <div class="slider-tab"></div>
+    </div>
+    <div class="form-inner">
+        <form class="signup" method="POST" novalidate>
+            {% csrf_token %}
+            <div class="field">
+                {{ form.username }}
+                <span class="errorlist" style="color:red;">{{ form.username.errors }}</span>
+            </div>
+            <div class="field">
+                {{ form.email }}
+                <span class="errorlist" style="color:red;">{{ form.email.errors }}</span>
+            </div>
+            <div class="field">
+                {{ form.password1 }}
+                <span class="errorlist" style="color:red;">{{ form.password1.errors }}</span>
+            </div>
+            <div class="field">
+                {{ form.password2 }}
+                <span class="errorlist" style="color:red;">{{ form.password2.errors }}</span>
+            </div>
+            <br>
+            <div class="field">
+                {{ form.inventories }}
+                <span class="errorlist" style="color:red;">{{ form.inventories.errors }}</span>
+            </div>
+            <div class="pass-link"><a href="{%url 'login' %}">Login</a></div>
+            <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Signup">
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>

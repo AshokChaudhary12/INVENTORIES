@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/desbord.css' %}">
+
+{% endblock css %}
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-sm-3 col-xs-12">
+                            <h4 class="title">Data <span>List</span></h4>
+                        </div>
+
+                        <form class="form-inline my-2 my-lg-0" action="{% url 'desbord' %}" method="GET">
+                            <input style="width: 30%; m" class="form-control" type="search" placeholder="Search"
+                                   aria-label="search" name="search">
+                            <input class="form-control mr-sm-2 sortable" type="date" placeholder="Start Date"
+                                   name="start_date" style="margin-left: auto;">
+                            <input class="form-control mr-sm-2 sortable" type="date" placeholder="End Date"
+                                   name="end_date"><br>
+                            <button class="form-control mr-sm-2 btn btn-outline-success " type="submit">Submit</button>
+
+                        </form>
+
+                    </div>
+                </div>
+                <div class="panel-body table-responsive">
+                    {% csrf_token %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>InventoryType</th>
+                            <th>name</th>
+                            <th>Quantity</th>
+                            <th>purchase_date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>    <!-- class="count">{{ forloop.counter }}-->
+                            <td>{{ i.inventry_type }}</td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.quantity }}</td>
+                            <td>{{ i.purchase_date }}</td>
+                            <td><a href="{% url 'update' i.pk  %}"><i class="fas fa-edit">Edit</i></a></td>
+                            <td><a href="{% url 'delete' i.pk %}">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class='pagination justify-content-center'>
+                        {% if page_obj.has_previous %}
+                        <a href='{% url "desbord" %}?page={{ page_obj.previous_page_number }}&start_date={{ start_date|safe }}&end_date={{ end_date|safe }}'
+                           style="color: #fff"><b>Previous</b></a>
+                        {% endif %}
+
+                        <span class='mx-4'>
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                        <a href='{% url "desbord" %}?page={{ page_obj.next_page_number }}&start_date={{ start_date |safe }}&end_date={{ end_date |safe }}'
+                           style="color: #fff"><b>Next</b></a>
+                        {% endif %}
+                        <form style="margin-right: 50px; margin-left: 50px;" action="{% url 'desbord' %}?size={{ paginate_by }} " method="get">
+                            <select name="paginate_by">
+                                <option>5</option>
+                                <option>7</option>
+                                <option>10</option>
+                                <option>12</option>
+                                <option>14</option>
+                                <option>15</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
