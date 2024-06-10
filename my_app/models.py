@@ -1,3 +1,4 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -25,7 +26,12 @@ class InventoriesTypes(models.Model):
     name = models.CharField(max_length=20, null=False)
 
     def __str__(self):
-       return f" {self.name}"
+        return f" {self.name}"
+
+
+class InventoryImage(models.Model):
+    image = models.FileField(upload_to='Inventories/images', null=True, blank=True,
+                             validators=[FileExtensionValidator(['png', 'jpg', 'svg'])])
 
 
 class Inventories(models.Model):
@@ -35,6 +41,8 @@ class Inventories(models.Model):
     quantity = models.PositiveIntegerField(null=True)
     purchase_date = models.DateField()
     created_date = models.DateField(auto_now=True)
+    unit_price = models.DecimalField(max_digits=20, decimal_places=2)
+    images = models.ManyToManyField(InventoryImage, related_name='Inventories_images')
     is_delete = models.BooleanField(default=False)
 
     def __str__(self):

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_app',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'Inventories.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crud',
+        'NAME': 'mydb',
         'USER': 'my_user',
         'PASSWORD': 'ashok@5103',
         'HOST': 'localhost',
@@ -142,3 +143,5 @@ EMAIL_HOST_PASSWORD = "nwhu fmsm piga fuwd"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "my_app.User"
+
+SHIPPING = 20

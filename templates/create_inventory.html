@@ -26,8 +26,23 @@
                     <span class="errorlist" style="color:red;">{{ form.quantity.errors }}</span>
                 </div>
                 <div class="form-group">
+                    {{ form.unit_price }}
+                    <span class="errorlist" style="color:red;">{{ form.unit_price.errors }}</span>
+                </div>
+                <div class="form-group">
                     {{ form.purchase_date }}
                     <span class="errorlist" style="color:red;">{{ form.purchase_date.errors }}</span>
+                </div>
+                <div class="form-group">
+                    {{ formset.management_form }}
+                        {% for form in formset %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">
+                            {{ form.image.label_tag }}
+                            <input required name="images" type="file" multiple class="from-control-file">
+                            <span class="errorlist" style="color:red;">{{ form.image.errors }}</span>
+                        </div>
+                    {% endfor %}
                 </div>
                 <div class="form-group">
                     <input type="submit" name="btnSubmit" class="btnContact" value="Submit"/>

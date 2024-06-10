@@ -17,4 +17,9 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(models.Inventories)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'inventry_type', 'name', 'quantity']
+    list_display = ['id', 'inventry_type', 'name', 'quantity', 'unit_price']
+
+
+@admin.register(models.InventoryImage)
+class AuthorAdmin(admin.ModelAdmin):
+    pass

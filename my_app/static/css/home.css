@@ -107,15 +107,11 @@ input[type="radio"]{
   transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
 .form-inner form .field{
-  height: 50px;
-  width: 100%;
   margin-top: 20px;
 }
 .form-inner form .field input{
-  height: 100%;
-  width: 100%;
+  padding : 10px 8px;
   outline: none;
-  padding-left: 15px;
   border-radius: 15px;
   border: 1px solid lightgrey;
   border-bottom-width: 2px;

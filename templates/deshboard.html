@@ -23,9 +23,7 @@
                             <input class="form-control mr-sm-2 sortable" type="date" placeholder="End Date"
                                    name="end_date"><br>
                             <button class="form-control mr-sm-2 btn btn-outline-success " type="submit">Submit</button>
-
                         </form>
-
                     </div>
                 </div>
                 <div class="panel-body table-responsive">
@@ -33,13 +31,16 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Number</th>
+                            <th>ID</th>
                             <th>InventoryType</th>
                             <th>name</th>
                             <th>Quantity</th>
                             <th>purchase_date</th>
+                            <th>unit_price</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Download</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -50,16 +51,18 @@
                             <td>{{ i.name }}</td>
                             <td>{{ i.quantity }}</td>
                             <td>{{ i.purchase_date }}</td>
+                            <td>{{ i.unit_price }}</td>
                             <td><a href="{% url 'update' i.pk  %}"><i class="fas fa-edit">Edit</i></a></td>
                             <td><a href="{% url 'delete' i.pk %}">Delete</a></td>
+                            <td><a href="{% url 'generate_pdf' i.pk %}"><i class="fas fa-edit">Download</i></a></td>
                         </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                     <div class='pagination justify-content-center'>
                         {% if page_obj.has_previous %}
-                        <a href='{% url "desbord" %}?page={{ page_obj.previous_page_number }}&start_date={{ start_date|safe }}&end_date={{ end_date|safe }}'
-                           style="color: #fff"><b>Previous</b></a>
+                        <a href='{% url "desbord" %}?page={{ page_obj.previous_page_number }}&start_date={{ start_date|safe }}&end_date={{ end_date|safe }}&paginate_by={{ paginate_by }}'
+                           style="color: #fff;"><b>Previous</b></a>
                         {% endif %}
 
                         <span class='mx-4'>
@@ -67,19 +70,22 @@
                         </span>
 
                         {% if page_obj.has_next %}
-                        <a href='{% url "desbord" %}?page={{ page_obj.next_page_number }}&start_date={{ start_date |safe }}&end_date={{ end_date |safe }}'
-                           style="color: #fff"><b>Next</b></a>
+                        <a href='{% url "desbord" %}?page={{ page_obj.next_page_number }}&start_date={{ start_date |safe }}&end_date={{ end_date |safe }}&paginate_by={{ paginate_by }}'
+                           style="color: #fff"><b style="margin-right: 200px;">Next</b></a>
                         {% endif %}
-                        <form style="margin-right: 50px; margin-left: 50px;" action="{% url 'desbord' %}?size={{ paginate_by }} " method="get">
-                            <select name="paginate_by">
-                                <option>5</option>
-                                <option>7</option>
-                                <option>10</option>
-                                <option>12</option>
-                                <option>14</option>
-                                <option>15</option>
-                            </select>
-                        </form>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="margin-right: -200px;">
+                                Paginate By {{ request.GET.paginate_by }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="?paginate_by=2&{{paginate_parameter}}">2</a>
+                                <a class="dropdown-item" href="?paginate_by=5&{{paginate_parameter}}">5</a>
+                                <a class="dropdown-item" href="?paginate_by=7&{{paginate_parameter}}">7</a>
+                                <a class="dropdown-item" href="?paginate_by=10&{{paginate_parameter}}">10</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
