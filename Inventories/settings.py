@@ -129,6 +129,9 @@ STATIC_URL = 'static/'
 
 LOGIN_REDIRECT_URL = reverse_lazy('inventories')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
+LOGIN_URL =reverse_lazy('login')
+LOGOUT_URL =reverse_lazy('login')
+
 ### mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

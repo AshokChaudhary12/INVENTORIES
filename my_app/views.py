@@ -1,17 +1,15 @@
-from urllib import request
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView
 from django.db.models import Q
-from django.http import HttpResponseRedirect, FileResponse, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
 from django.views.generic import FormView, TemplateView, UpdateView, DeleteView, ListView
-from reportlab.pdfgen import canvas
 from weasyprint import HTML
 from Inventories import settings
 from Inventories.settings import SHIPPING
-# from .filters import InventoriesFilters
 from .forms import UserForm, InventoriesForm, LoginForm, InventoriesTypesForm, InventoryImageFormSet
 from .models import Inventories, InventoryImage
 from django.contrib.messages.views import SuccessMessageMixin
@@ -59,6 +57,7 @@ class InventoriesView(FormView):
     form_class = InventoriesForm
     template_name = "create_inventory.html"
     success_url = reverse_lazy('desbord')
+    success_message = "Inventories created successful."
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -136,7 +135,6 @@ class DashboardView(ListView):
         start_date = self.request.GET.get('start_date')
         end_date = self.request.GET.get('end_date')
         paginate_by = self.request.GET.get('paginate_by')
-        # print("-----------", paginate_by)
         print("search--", search)
         if search:
             queryset = queryset.filter(Q(name__icontains=search) | Q(inventry_type__name__icontains=search))

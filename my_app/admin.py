@@ -22,4 +22,4 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(models.InventoryImage)
 class AuthorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['image']

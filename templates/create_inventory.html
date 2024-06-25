@@ -39,7 +39,7 @@
                         {{ form.non_field_errors }}
                         <div class="form-group">
                             {{ form.image.label_tag }}
-                            <input required name="images" type="file" multiple class="from-control-file">
+                            <input accept="image/png, image/jpeg" required name="images" type="file" multiple class="from-control-file">
                             <span class="errorlist" style="color:red;">{{ form.image.errors }}</span>
                         </div>
                     {% endfor %}

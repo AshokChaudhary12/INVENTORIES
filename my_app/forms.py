@@ -68,8 +68,15 @@ class LoginForm(AuthenticationForm):
         username = self.cleaned_data.get('username')
 
         if not User.objects.filter(username=username).exists():
-            raise forms.ValidationError('User does not exist.! plese enter valid user')
+            raise forms.ValidationError('User does not exist.! enter a valid user')
         return username
+
+    # def clean_password(self):
+    #     password = self.cleaned_data.get('password')
+    #
+    #     if not User.objects.filter(password=password).exists():
+    #         raise forms.ValidationError('Incorrect username  password !!')
+    #     return password
 
 
 class InventoriesForm(forms.ModelForm):

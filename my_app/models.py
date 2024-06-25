@@ -31,7 +31,7 @@ class InventoriesTypes(models.Model):
 
 class InventoryImage(models.Model):
     image = models.FileField(upload_to='Inventories/images', null=True, blank=True,
-                             validators=[FileExtensionValidator(['png', 'jpg', 'svg'])])
+                             validators=[FileExtensionValidator(['.png', '.jpg', '.svg'])])
 
 
 class Inventories(models.Model):
